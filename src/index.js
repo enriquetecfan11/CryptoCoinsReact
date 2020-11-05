@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import axios from "axios";
-import ScotchInfoBar from "./ScotchInfoBar";
 import "./styles.css";
+import Card from "react-bootstrap/CardColumns";
 
 function App() {
   const [coins, setCoins] = useState(null);
@@ -23,32 +23,42 @@ function App() {
       {/* Fetch data from API */}
       <div>
         <button className="fetch-button" onClick={fetchData}>
-          get Data
+          Get Data
         </button>
         <br />
       </div>
 
       {/* Display data from API */}
+
       <div className="coins">
         {coins &&
           coins.map((coins, index) => {
             return (
-              <div className="book" key={index}>
-                <h2>{coins.name}</h2>
-                <image alt="logo" src={coins.image} />
+            <ul>
+              <li>
+                <img alt="" className="imagen" src={coins.image}/>
+              </li>
+              <li>
+               Coin Name -> {coins.name}
+              </li>
+              <li>
+               Crypto Value -> {coins.current_price} $
+              </li>
+              <li>
+                Price chage in 24 hours -> {coins.price_change_24h} $
+              </li>
+              <li>
+                Price High in 24 hours -> {coins.high_24h} $ 
+               </li>
+               <li> 
+                Price Low in 24 hours -> {coins.low_24h} $
+              </li>
 
-                <div className="details">
-                  <image alt="logo" src={coins.image} />
-                  <p>🤑 Current Price: {coins.current_price} $</p>
-                  <p>💰 Price High 24 Hours: {coins.high_24h} $</p>
-                  <p>💰 Price Low 24 Hours: {coins.low_24h} $</p>
-                </div>
-              </div>
+            </ul>
             );
           })}
       </div>
 
-      <ScotchInfoBar seriesNumber="7" />
     </div>
   );
 }
